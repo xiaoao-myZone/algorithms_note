@@ -1,0 +1,17 @@
+{
+    "task_id": "001",
+    "task_status": 0,
+    "from": "输送线-0",
+    "to": "垛-1",
+    "task_num": 10,
+    "real_num": 5,
+    "mode": "码垛",
+    "sku_info": {
+        "width": 12.4,
+        "length": 15.0,
+        "height": 14.2,
+        "weight": 2,
+        "barcode": "692356416123",
+        "name": "cookies"
+    }
+}
