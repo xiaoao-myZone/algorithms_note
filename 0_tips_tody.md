@@ -31,3 +31,6 @@
 
 >> TODO
 9. 各种比较运算符的使用有没有什么讲究,速度有没有先后
+
+## malloc
+1. realloc: 自动释放原地址,可以在原地址没有使用malloc的条件下使用realloc [realloc](https://blog.csdn.net/nvd11/article/details/8749394?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&spm=1001.2101.3001.4242)

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <malloc.h>
+#include <stdbool.h>
 
 /*
 
@@ -8,10 +9,16 @@
 /*
 pre:
     1. 暴力的做法是从n个数中抽3个进行,这样时间复杂度是O(n3)
-    2. 借鉴两数之和的经验,可以将这个问题转化为若干个两数之和的问题
+    
+
+
+
+
+
     3. 如果先排序nlog(n),可以变成O(n2)
     4. 注意: 列表里存在重复的数,但是要求结果不可以存在重复的结果
     5. 排序后, 结果是全零,或者有正有负
+    6. 排序后, 可以用二分法,双指针
 
 post:
     1.
@@ -68,13 +75,53 @@ void bubbleSort(int * nums, int size){
 }
 
 int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes){
-    bubbleSort(nums, numsSize);
+    bubbleSort(nums, numsSize); // ascent
+    int ** ret;
+    //ret = (int**)malloc(sizeof(int *)*1);
     int i,j;
-    for(i=0; nums[i]<0; i++){
-
-        for(j=numsSize-1; nums[j]>0; j++){
-            
+    i = 0;
+    *returnSize = 0;
+    j=numsSize;
+    int tmp;
+    int third;
+    bool isCatch = false;
+    while (i!=j){
+        isCatch = false;
+        third = -(nums[i] + nums[j]);
+        if (third>0){
+            for(tmp=j-1; nums[tmp]>0; tmp--){
+                if (nums[tmp]==third){
+                    isCatch = true;
+                    (*returnSize)++;
+                    ret = (int **)realloc(ret, sizeof(int *)*(*returnSize));
+                    //ret[(*returnSize)-1] = {nums[i], nums[tmp], nums[j]};
+                    ret[(*returnSize)-1] = (int *)malloc(sizeof(int)*3);
+                    ret[(*returnSize)-1][0] = nums[i];
+                    ret[(*returnSize)-1][1] = nums[tmp];
+                    ret[(*returnSize)-1][2] = nums[j];
+                    break;
+                }
+            }
+            if (!isCatch){
+                
+            }
         }
+        else {
+            for(tmp=i+1; nums[tmp]<=0; tmp++){
+                if (nums[tmp]==third){
+                    isCatch = true;
+                    (*returnSize)++;
+                    ret = (int **)realloc(ret, sizeof(int *)*(*returnSize));
+                    //ret[(*returnSize)-1] = {nums[i], nums[tmp], nums[j]};
+                    ret[(*returnSize)-1] = (int *)malloc(sizeof(int)*3);
+                    ret[(*returnSize)-1][0] = nums[i];
+                    ret[(*returnSize)-1][1] = nums[tmp];
+                    ret[(*returnSize)-1][2] = nums[j];
+                    break;
+                }
+            }
+        }
+
     }
 }
 

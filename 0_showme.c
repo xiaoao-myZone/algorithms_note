@@ -83,8 +83,23 @@ void main(void){
     // printf("%ld\n", sizeof(a));
 
     /*12. 求余*/
-    int num = 5;
-    printf("%d\n", num%10/(10/10));
+    // int num = 5;
+    // printf("%d\n", num%10/(10/10));
+
+    /*13. realloc*/
+    int ** ret;
+    //ret = NULL;
+    //ret = (int **)malloc(sizeof(int *)*1);
+    ret = (int **)realloc(ret, sizeof(int *)*2);
+    // ret[0] = 1;
+    // ret[1] = 2;
+    int a[] = {1,2,3};
+    ret[0] = a;
+    ret = (int **)realloc(ret, sizeof(int *)*3);
+    ret[2] = a;
+    printf("%d, %d\n", ret[2][1], ret[2][0]);
+    //int m[] = {1, 2};
+    //int m[] = {ret[0], ret[0]};
     
     
 
