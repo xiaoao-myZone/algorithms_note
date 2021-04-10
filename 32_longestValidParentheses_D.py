@@ -79,8 +79,8 @@ class Solution(object):
             else:
                 if left_brackets:
                     left_brackets -= 1
-                    #log[-1] = log.pop() + 2 + log[-1]
-                    log[-1] += log.pop() + 2
+                    log[-1] = log.pop() + 2 + log[-1]
+                    # log[-1] += (log.pop() + 2)
                     print("log: %s, left_brackets: %d" % (log, left_brackets))
 
                 else:
@@ -103,6 +103,6 @@ if __name__ == "__main__":
     #s= "(()(()" 
     # s = "((()))"
     s=")()()(()())"
-    ret = Solution().longestValidParentheses(s)
+    ret = Solution().longestValidParentheses_plus(s)
     print()
     print(ret)
