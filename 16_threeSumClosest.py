@@ -41,8 +41,6 @@ class Solution(object):
                     if abs(vary_delta) < abs(delta):
                         delta = vary_delta
                     else:
-                        if not delta:
-                            return target
                         if delta<0:
                             if vary_delta<0:
                                 pass
