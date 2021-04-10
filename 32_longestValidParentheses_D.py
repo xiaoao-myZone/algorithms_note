@@ -22,11 +22,10 @@ post:
     7. 成功
     8. 这里只有'(', ')'两个值,不需要专门用栈存放, 如果不是这个题的特殊性, 甚至不需要栈, 一个数值来计数就可以
     9. 最后还是用到的了栈, 是因为最终的结果需要记录, 并且将聚焦点放在现存左括号数量上
-    10. 与plus相比, 第一次成功的答案没有很准确理解栈的定义--当所有左括号都消失时, log内应有值,就是结果,类似与函数调用的main的地位
+    10. 与plus相比, 第一次成功的答案没有很准确理解栈的定义--当所有左括号都消失时, log内应有值,就是子结果,类似与函数调用的main的地位
     11. 无需用sum(log[left_bracket:]), 因为栈的回退是一层一层的, 不会出现跃层
 
 """
-from queue import LifoQueue
 class Solution(object):
     def longestValidParentheses(self, s):
         """给你一个只包含 '(' 和 ')' 的字符串，找出最长有效（格式正确且连续）括号子串的长度。
@@ -80,7 +79,8 @@ class Solution(object):
             else:
                 if left_brackets:
                     left_brackets -= 1
-                    log[-1] = log.pop() + 2 + log[-1]
+                    #log[-1] = log.pop() + 2 + log[-1]
+                    log[-1] += log.pop() + 2
                     print("log: %s, left_brackets: %d" % (log, left_brackets))
 
                 else:
