@@ -5,6 +5,10 @@
 几个月后再次尝试
 执行用时：16 ms, 在所有 C 提交中击败了80.36% 的用户
 内存消耗：7 MB, 在所有 C 提交中击败了94.77% 的用户
+
+又过了几个月后继续尝试
+执行用时：8 ms, 在所有 C 提交中击败了99.27% 的用户
+内存消耗：7.2 MB, 在所有 C 提交中击败了87.66% 的用户
 */
 struct ListNode {
      int val;
@@ -72,15 +76,29 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
     unsigned i = 0;
     while (l1->next && l2->next){
         l1->val += l2->val + i;
-        i = l1->val / 10;
-        l1->val %= 10;
+        //i = l1->val / 10;
+        // l1->val %= 10;
+        if (l1->val>9) {
+            i=1;
+            l1->val -= 10;
+        }
+        else {
+            i=0;
+        }
         l1 = l1->next;
         l2 = l2->next; //如果这样,当两个链表长度相同时,将获取不到最后的句柄
     }
 
     l1->val += l2->val + i;
-    i = l1->val / 10;
-    l1->val %= 10;
+    //i = l1->val / 10;
+    // l1->val %= 10;
+    if (l1->val>9) {
+        i=1;
+        l1->val -= 10;
+    }
+    else {
+        i=0;
+    }
 
     if(l2->next){//l1指向最后一个数
 
@@ -91,8 +109,15 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
         if(l1->next){
             l1 = l1->next;//上一位已经操作完成
             l1->val += i;
-            i = l1->val / 10;
-            l1->val %= 10;
+            //i = l1->val / 10;
+            // l1->val %= 10;
+            if (l1->val>9) {
+                i=1;
+                l1->val -= 10;
+            }
+            else {
+                i=0;
+            }
         }
         else{
             l1->next = (struct ListNode *)malloc(sizeof(struct ListNode));
