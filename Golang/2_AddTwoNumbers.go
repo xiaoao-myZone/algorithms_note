@@ -6,6 +6,10 @@ case-0
 case-1
 执行用时：8 ms, 在所有 Go 提交中击败了92.19% 的用户
 内存消耗：4.4 MB, 在所有 Go 提交中击败了98.90% 的用户 // 少了一个ahead, 居然内存没啥变化
+
+case-2 (halfrost真有那么丝滑)
+执行用时：4 ms, 在所有 Go 提交中击败了99.14% 的用户
+内存消耗：4.6 MB, 在所有 Go 提交中击败了79.33% 的用户
 */
 package main
 
@@ -124,6 +128,29 @@ func addTwoNumbers_1(l1 *ListNode, l2 *ListNode) *ListNode {
 	}
 
 	return head
+}
+
+func addTwoNumbers_2(l1 *ListNode, l2 *ListNode) *ListNode {
+	head := &ListNode{Val: 0} // 为什么halfrost创建一个新分片结果, 它的内存消耗居然和我相差不大
+	n1, n2, carry, current := 0, 0, 0, head
+	for l1 != nil || l2 != nil || carry != 0 {
+		if l1 == nil {
+			n1 = 0
+		} else {
+			n1 = l1.Val
+			l1 = l1.Next
+		}
+		if l2 == nil {
+			n2 = 0
+		} else {
+			n2 = l2.Val
+			l2 = l2.Next
+		}
+		current.Next = &ListNode{Val: (n1 + n2 + carry) % 10}
+		current = current.Next
+		carry = (n1 + n2 + carry) / 10
+	}
+	return head.Next
 }
 
 func showNodes(node *ListNode) {
