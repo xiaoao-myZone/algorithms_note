@@ -59,7 +59,13 @@ func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 }
 
 func findMedianSortedArrays_1(nums1 []int, nums2 []int) float64 {
+	//真的妙
 	// 假设 nums1 的长度小
+	/*
+		1. 未必一定要在一个融合两个数组的数组中才能找到中线
+		2. 中线只是一个阵营的划分, 中线两边必然都由两个原数组组成
+		3. 根据奇偶, 找到中线两边的最大值与最小值
+	*/
 	if len(nums1) > len(nums2) {
 		return findMedianSortedArrays(nums2, nums1)
 	}
@@ -72,7 +78,7 @@ func findMedianSortedArrays_1(nums1 []int, nums2 []int) float64 {
 		if nums1Mid > 0 && nums1[nums1Mid-1] > nums2[nums2Mid] { // nums1 中的分界线划多了，要向左边移动
 			high = nums1Mid - 1
 		} else if nums1Mid != len(nums1) && nums1[nums1Mid] < nums2[nums2Mid-1] { // nums1 中的分界线划少了，要向右边移动
-			low = nums1Mid + 1 //这里重复计算nums1的长度没有问题吗?难道是go内部优化了?
+			low = nums1Mid + 1 //这里重复计算nums1的长度没有问题吗?难道是go内部优化了? TODO
 		} else {
 			// 找到合适的划分了，需要输出最终结果了
 			// 分为奇数偶数 2 种情况
