@@ -24,11 +24,14 @@
 */
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
 	nums := []int{-1, 0, 1, 2, -1, -4, -2, -3, 3, 0, 4}
-	ret := threeSum(nums)
+	ret := threeSum_1(nums)
 	fmt.Println("The result is ", ret, len(ret))
 }
 
@@ -80,7 +83,45 @@ func threeSum(nums []int) [][]int {
 	return res
 }
 
+func threeSum0(nums []int) [][]int {
+	// 与第一种基本没有什么差别
+	sort.Ints(nums)
+	res := [][]int{}
+	m_i := map[int]int{}
+	m_j := map[int]int{}
+	m_z := map[int]int{}
+	val := 0
+	for out_index, i := range nums {
+
+		if _, ok := m_i[i]; ok {
+			continue
+		}
+		// fmt.Println("out: ", i)
+		m_i[i] = 0
+		m_j = map[int]int{}
+		m_z = map[int]int{}
+		for _, j := range nums[out_index+1:] {
+
+			if _, ok := m_j[j]; ok {
+				continue
+			}
+			val = -i - j
+			if _, ok := m_z[val]; ok {
+				res = append(res, []int{i, val, j})
+				m_j[j], m_j[val] = 0, 0
+			} else {
+				m_z[j] = 0
+			}
+		}
+
+	}
+	return res
+}
+
 // 解法一 最优解，双指针 + 排序
+// 这个解法最基本的认识是, 排序后, 三个解一定是按先后顺序出现在结果中
+// 所以采用先取中间, 在收尾相夹的办法来解决
+// 分阵营(正负零)对比这个而言蠢爆了
 func threeSum1(nums []int) [][]int {
 	sort.Ints(nums)
 	result, start, end, index, addNum, length := make([][]int, 0), 0, 0, 0, 0, len(nums)
