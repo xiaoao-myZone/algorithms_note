@@ -31,7 +31,7 @@ import (
 
 func main() {
 	nums := []int{-1, 0, 1, 2, -1, -4, -2, -3, 3, 0, 4}
-	ret := threeSum_1(nums)
+	ret := threeSum1(nums)
 	fmt.Println("The result is ", ret, len(ret))
 }
 
