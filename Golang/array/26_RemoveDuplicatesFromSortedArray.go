@@ -9,6 +9,12 @@ halfrost
 将nums直接传递给函数,只拷贝了slice的三个参数以及内部数组的地址首地址
 打印slice的地址其实是内部数组的作为其首部的索引地址
 
+要求:
+给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使每个元素 只出现一次 ，返回删除后数组的新长度。
+
+不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成
+
+
 网站最后的判断依据是nums[:ret]
 */
 package main
@@ -47,7 +53,7 @@ func removeDuplicates(nums []int) int {
 }
 
 func removeDuplicates_1(nums []int) int {
-	fmt.Printf("%p\n", &nums)
+	//妙
 	if len(nums) == 0 {
 		return 0
 	}
