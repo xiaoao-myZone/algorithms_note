@@ -1,5 +1,13 @@
 /*
- */
+Score:
+
+
+Points:
+1.
+
+Thoughts:
+1.
+*/
 package main
 
 import "fmt"
