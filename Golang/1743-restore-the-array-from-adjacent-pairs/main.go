@@ -84,6 +84,7 @@ func restoreArray(adjacentPairs [][]int) []int {
 }
 
 func restoreArray1(adjacentPairs [][]int) []int {
+	// 从出度,入度以及有没有其他数对的元素指向它分析
 	res, search_map := []int{}, map[int][2][2]int{} //三元组, 邻接的值, 出度, 入度
 	for _, pairs := range adjacentPairs {
 		left := pairs[0]
