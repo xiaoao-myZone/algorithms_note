@@ -1,6 +1,7 @@
 /*
 Score:
-
+执行用时：0 ms, 在所有 Go 提交中击败了100.00% 的用户
+内存消耗：2.4 MB, 在所有 Go 提交中击败了12.89% 的用户
 
 Points:
 1. 不许用编程语言自带的乘法, 除法以及求余运算
@@ -26,8 +27,8 @@ import (
 )
 
 func main() {
-	dividend := 2147483647 //-2147483648
-	divisor := 1
+	dividend := 7 //-2147483648
+	divisor := 8
 
 	ret := divide1(dividend, divisor)
 	fmt.Println("The result is ", ret)
@@ -67,21 +68,43 @@ func divide(dividend int, divisor int) int {
 }
 
 func divide1(dividend int, divisor int) int {
-	bits := 30
-	res := 1
-	if dividend < divisor {
-		return 0
-	} else if dividend == divisor {
-		return 1
+	bits, res, isNegtive := 31, 0, false
+	if dividend >= 0 && divisor >= 0 || dividend <= 0 && divisor <= 0 {
+		isNegtive = true
 	}
+	if dividend < 0 {
+		dividend = -dividend
+	}
+	if divisor < 0 {
+		divisor = -divisor
+	}
+	fmt.Println(dividend, divisor, isNegtive)
 	for {
-		if dividend>>bits >= divisor {
+		if dividend < divisor {
 			break
 		}
-		bits--
+		for {
+			if dividend>>bits >= divisor {
+				break
+			}
+			bits--
+			// fmt.Println(bits)
+
+		}
+		res += 1 << bits
+		// fmt.Println(res)
+		dividend = dividend - divisor<<bits
 
 	}
-	res = 1 << bits
-	res += divide1(dividend-divisor<<bits, divisor)
-	return res
+	if isNegtive {
+		if res > math.MaxInt32 {
+			return math.MaxInt32
+		} else {
+			return res
+		}
+
+	} else {
+		return -res
+	}
+
 }
