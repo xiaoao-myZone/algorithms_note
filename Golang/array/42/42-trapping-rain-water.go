@@ -1,6 +1,7 @@
 /*
 Score:
-
+执行用时：4 ms, 在所有 Go 提交中击败了77.69% 的用户
+内存消耗：2.8 MB, 在所有 Go 提交中击败了100.00% 的用户
 
 Points:
 1.
@@ -28,138 +29,34 @@ Thoughts:
 */
 package leetcode
 
-type block struct {
-	height int
-	index  int
-}
-
 func trap(height []int) int {
+	//fmt.Println("************")
 	// origin 到 left 之间是一个非升序列
-	res, origin, left := 0, 0, 0
+	res, origin, shorter := 0, 0, 0
+	//fmt.Println(height[0], "初始高度")
 	for right := 1; right < len(height); right++ {
-		if height[right] > height[right-1] { // 蓄水次上升过程，需要结算
+		//fmt.Println("***", height[origin:right+1])
+		if height[right] > height[right-1] { // 蓄水池上升过程，需要结算
+			//fmt.Println(height[right], "开始蓄水")
 			if height[right] > height[origin] {
 				shorter = height[origin]
 			} else {
 				shorter = height[right]
 			}
-			for index := right - 1; index >= 0 && height[index] <= shorter; index-- {
+			//fmt.Println("	短边: ", shorter)
+			for index := right - 1; index >= 0 && height[index] < shorter; index-- {
 				res += shorter - height[index]
+				//fmt.Println("		增加: ", shorter-height[index])
 				height[index] = shorter
 			}
 			if height[origin] == shorter {
 				origin = right
 
 			}
-			// for height[left] < height[right] {
-			// 	res += (shorter - height[left]) * distance
-			// 	left--
-			// 	if left == 0 {
-			// 		left = right
-			// 		break
-			// 	}
-			// }
-		} else { //下降或者平流过程
-			left++
-		}
-
+		} //else { //下降或者平流过程
+		//fmt.Println(height[right], "下降或者平流")
+		//}
+		//fmt.Println("current res ", res)
 	}
 	return res
 }
-
-// func trap(height []int) int {
-// 	res, tmp, count, distance := 0, make([]int, len(height)), 0, 0
-// 	for index, num := range height {
-// 		fmt.Println("******: ", num)
-// 		//第一个值为0该如何
-// 		if num > tmp[count] {
-
-// 			if count == 0 { // 如果count为零表示已经结算完成
-// 				tmp[0] = num
-// 				fmt.Println("1 ", tmp[:count+1])
-// 			} else { //否则是从谷底往上升
-// 				// if tmp[0] > num {
-// 				// 	shorter = num
-// 				// } else {
-// 				// 	shorter = tmp[0]
-// 				// }
-// 				for i := 0; ; i++ { //因为tmp的入栈方式， 使它不可能出现count=-1的情况(不是)
-// 					distance++
-// 					if tmp[count] >= num {
-// 						break
-// 					}
-// 					fmt.Println("2 ", tmp[:count+1])
-// 					res += (num - tmp[count]) * (i + distance)
-// 					if count == 0 {
-// 						tmp[0] = num
-// 						distance = 0
-// 						break
-// 					}
-// 					count--
-
-// 				}
-
-// 			}
-
-// 		} else { //如果小于说明可以入栈， 是一个往谷底下探的过程
-// 			if tmp[0] > num {
-// 				count++
-// 				tmp[count] = num
-// 				fmt.Println("3 ", tmp[:count+1])
-// 			}
-
-// 		}
-// 		fmt.Println("res ", res)
-// 	}
-// 	fmt.Println("last res ", res)
-
-// 	return res
-// }
-
-// func trap(height []int) int {
-// 	res, tmp, count, shorter := 0, make([]int, len(height)), 0, 0
-// 	fmt.Println("初始: ", tmp[:count+1])
-// 	for _, num := range height {
-// 		fmt.Println("******: ", num)
-// 		//第一个值为0该如何
-// 		if num > tmp[count] {
-
-// 			if count == 0 { // 如果count为零表示已经结算完成
-// 				tmp[0] = num
-// 				fmt.Println("1 ", tmp[:count+1])
-// 			} else { //否则是从谷底往上升
-// 				if tmp[0] > num {
-// 					shorter = num
-// 				} else {
-// 					shorter = tmp[0]
-// 				}
-// 				for { //因为tmp的入栈方式， 使它不可能出现count=-1的情况(不是)
-// 					if tmp[count] >= num {
-// 						break
-// 					}
-// 					fmt.Println("2 ", tmp[:count+1])
-// 					res += shorter - tmp[count]
-// 					if count == 0 {
-// 						tmp[0] = num
-// 						break
-// 					}
-// 					count--
-
-// 				}
-
-// 			}
-
-// 		} else { //如果小于说明可以入栈， 是一个往谷底下探的过程
-// 			if tmp[0] > num {
-// 				count++
-// 				tmp[count] = num
-// 				fmt.Println("3 ", tmp[:count+1])
-// 			}
-
-// 		}
-// 		fmt.Println("res ", res)
-// 	}
-// 	fmt.Println("last res ", res)
-// 	return res
-
-// }
