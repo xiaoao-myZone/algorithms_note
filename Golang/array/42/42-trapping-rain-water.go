@@ -47,7 +47,7 @@ func trap(height []int) int {
 			for index := right - 1; index >= 0 && height[index] < shorter; index-- {
 				res += shorter - height[index]
 				//fmt.Println("		增加: ", shorter-height[index])
-				height[index] = shorter
+				height[index] = shorter // 填平水已经浸没的地方
 			}
 			if height[origin] == shorter {
 				origin = right
