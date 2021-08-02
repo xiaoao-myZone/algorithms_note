@@ -9,7 +9,7 @@ type TestCase struct {
 	output int
 }
 
-func Test_0_template(t *testing.T) {
+func Test_41(t *testing.T) {
 	test_cases := []TestCase{
 		{[]int{2, 0, 1}, 3},
 		{[]int{3, 4, -1, 1}, 2},
