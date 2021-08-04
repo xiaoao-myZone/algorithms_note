@@ -20,7 +20,7 @@ func Test_0_template(t *testing.T) {
 		if res := my_sqrt(test_case.input); res == test_case.output {
 			t.Log("通过")
 		} else {
-			t.Error("未通过")
+			t.Error("未通过", res, "/", test_case.output)
 		}
 	}
 }
