@@ -37,5 +37,6 @@ package leetcode
 // import "fmt"
 
 func strStr(haystack string, needle string) int {
+	// TODO
 	return 0
 }
