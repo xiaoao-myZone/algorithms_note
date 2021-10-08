@@ -87,19 +87,21 @@ void main(void){
     // printf("%d\n", num%10/(10/10));
 
     /*13. realloc*/
-    int ** ret;
-    //ret = NULL;
-    //ret = (int **)malloc(sizeof(int *)*1);
-    ret = (int **)realloc(ret, sizeof(int *)*2);
-    // ret[0] = 1;
-    // ret[1] = 2;
-    int a[] = {1,2,3};
-    ret[0] = a;
-    ret = (int **)realloc(ret, sizeof(int *)*3);
-    ret[2] = a;
-    printf("%d, %d\n", ret[2][1], ret[2][0]);
-    //int m[] = {1, 2};
-    //int m[] = {ret[0], ret[0]};
+    // int ** ret;
+    // //ret = (int **)malloc(sizeof(int *)*1);
+    // ret = (int **)realloc(ret, sizeof(int *)*2);
+    // int a[] = {1,2,3};
+    // ret[0] = a;
+    // ret = (int **)realloc(ret, sizeof(int *)*3);
+    // ret[2] = a;
+    // printf("%d, %d\n", ret[2][1], ret[2][0]);
+
+    /*14. point and array name */
+    int a[]={1,2,3,4,5};
+    int *p = a;
+    p++;
+    // a++; syntax error
+    printf("%d\n", p[1]);
     
     
 
